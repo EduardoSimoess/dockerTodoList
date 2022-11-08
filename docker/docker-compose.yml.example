@@ -1,11 +1,17 @@
-version: 'X'
+version: '3'
 services:
-  app_A:
-    # ...
-    # parâmetros
-    # ...
-  app_B:
-    # ...
-    # parâmetros
-    # ...
-  # ...
+  todotests:
+    build: tests/
+    depends_on:
+      - frontend
+      - backend
+    environment:
+      FRONT_HOST: frontend
+  todofrontend:
+    build: front-end/
+    depends_on:
+      - backend
+    environment:
+      REACT_APP_API_HOST: backend
+  database:
+    image: betrybe/docker-compose-example-database:v1    # Especificamos a Imagem Docker diretamente.
